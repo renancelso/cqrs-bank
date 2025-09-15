@@ -25,7 +25,7 @@ public abstract class IntegrationTestBase {
     static void start() {
         //Se Docker não está disponível, marca como SKIPPED em vez de falhar
         if (!DockerClientFactory.instance().isDockerAvailable()) {
-            throw new TestAbortedException("Docker não disponível — pulando testes E2E com Testcontainers.");
+            throw new TestAbortedException("Docker não disponível — pulando testes E2E");
         }
         mysql.start();
         mongo.start();
