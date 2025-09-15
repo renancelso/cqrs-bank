@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  jackson:
+    time-zone: UTC
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/cqrs_bank?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: cqrs_user
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: none   # já criamos as tabelas no MySQL
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/cqrs_bank_read
+
+app:
+  security:
+    jwt:
+      secret: "hXxHc8Rj5P6t9U7qK2Fv1yVgZ8mL4oWqJ6rD3pN7sT9xQ1vR8aU2mC4yL6zQ0wE1"
+      expiration-minutes: 60
