@@ -204,8 +204,8 @@ Fluxo:
 {
   "SaldoTotal": "47.00",
   "Historico": [
-    { "type": "deposito", "valor": "47.00", "data": "dd-MM-yyyy HH:mm:ss" },
-    { "type": "saque",    "valor": "153.00", "data": "dd-MM-yyyy HH:mm:ss" },
+    { "type": "deposito", "valor": "200.00", "data": "dd-MM-yyyy HH:mm:ss" },
+    { "type": "saque",    "valor": "3.00", "data": "dd-MM-yyyy HH:mm:ss" },
     { "type": "saque",    "valor": "150.00", "data": "dd-MM-yyyy HH:mm:ss" }
   ]
 }

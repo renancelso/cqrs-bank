@@ -50,10 +50,10 @@ class TransactionServiceTest {
         List<Transaction> txs = txCaptor.getAllValues();
 
         assertThat(txs.get(0).getType()).isEqualTo(TxType.BILL_PAYMENT);
-        assertThat(txs.get(0).getAmount()).isEqualByComparingTo("153.00");
+        assertThat(txs.get(0).getAmount()).isEqualByComparingTo("3.00");
 
         assertThat(txs.get(1).getType()).isEqualTo(TxType.DEPOSIT);
-        assertThat(txs.get(1).getAmount()).isEqualByComparingTo("47.00");
+        assertThat(txs.get(1).getAmount()).isEqualByComparingTo("200.00");
 
         verify(publisher).publishTransactionEvent("a1");
     }

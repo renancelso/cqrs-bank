@@ -62,19 +62,17 @@ public class TransactionService {
                 transactionRepository.save(Transaction.builder()
                         .account(account)
                         .type(TxType.BILL_PAYMENT)
-                        .amount(paymentRecorded)
+                        .amount(interestCharged)
                         .build());
             }
         }
 
-        if (remaining.compareTo(BigDecimal.ZERO) > 0) {
-            transactionRepository.save(Transaction.builder()
-                    .account(account)
-                    .type(TxType.DEPOSIT)
-                    .amount(remaining)
-                    .build());
-            account.setBalance(account.getBalance().add(remaining));
-        }
+        transactionRepository.save(Transaction.builder()
+                .account(account)
+                .type(TxType.DEPOSIT)
+                .amount(amount)
+                .build());
+        account.setBalance(account.getBalance().add(remaining));
 
         var saved = accountRepository.save(account);
         eventPublisher.publishTransactionEvent(saved.getId());
