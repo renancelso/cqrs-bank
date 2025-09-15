@@ -170,6 +170,17 @@ Fluxo:
 
 > Todos os endpoints abaixo exigem **JWT** no header.
 
+#### `POST /transactions/pay-bill`
+- **Paga uma conta** (lança débito). Se não houver saldo, a conta fica **negativada**.
+- Body:
+```json
+{ "amount": "150.00" }
+```
+- Resposta (exemplo):
+```json
+{ "balance": -150.00 }
+```
+
 #### `POST /transactions/deposit`
 - **Deposita** dinheiro na conta do usuário logado.
 - Regra: se o usuário está **negativado**, o depósito quita o **principal** e, **sobre a parte quitada**, cobra **juros de 1,02%** (o juro é debitado do próprio depósito, antes de creditar o restante).
@@ -180,17 +191,6 @@ Fluxo:
 - Resposta (exemplo, após pagar dívida de 150 + 3 juros):
 ```json
 { "balance": 47.00 }
-```
-
-#### `POST /transactions/pay-bill`
-- **Paga uma conta** (lança débito). Se não houver saldo, a conta fica **negativada**.
-- Body:
-```json
-{ "amount": "150.00" }
-```
-- Resposta (exemplo):
-```json
-{ "balance": -150.00 }
 ```
 
 ---
