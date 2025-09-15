@@ -13,6 +13,7 @@ Os **testes de integração** usam **Testcontainers** (MySQL e Mongo reais).
 - [Rodando a aplicação](#rodando-a-aplicação)
 - [Swagger / OpenAPI](#swagger--openapi)
 - [Autenticação (JWT)](#autenticação-jwt)
+- [Autenticação (JWT)](#autenticação-jwt)
 - [Endpoints](#endpoints)
   - [Auth](#auth)
   - [Transações](#transações)
@@ -146,7 +147,7 @@ Fluxo:
 ```json
 {
   "fullName": "Renan Celso",
-  "document": "00043207278",
+  "document": "39053344705",
   "login": "rcelso",
   "password": "123456"
 }
@@ -220,7 +221,7 @@ Fluxo:
    ```json
    {
      "fullName": "Renan Celso",
-     "document": "00043207278",
+     "document": "39053344705",
      "login": "rcelso",
      "password": "123456"
    }
