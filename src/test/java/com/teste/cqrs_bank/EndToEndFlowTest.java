@@ -27,7 +27,7 @@ class EndToEndFlowTest extends IntegrationTestBase {
         String signup = """
             {
               "fullName": "Renan Celso",
-              "document": "00043207278",
+              "document": "39053344705",
               "login": "rcelso",
               "password": "123456"
             }
