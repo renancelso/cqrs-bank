@@ -161,7 +161,7 @@ Fluxo:
 - Autentica um usuário e retorna **JWT**.
 - Body:
 ```json
-{ "login": "renan", "password": "123456" }
+{ "login": "rcelso", "password": "123456" }
 ```
 
 ---
