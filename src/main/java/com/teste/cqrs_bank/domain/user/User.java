@@ -3,10 +3,15 @@ package com.teste.cqrs_bank.domain.user;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Getter @Setter
+/**
+ * Entidade de usuário autenticável (Write Model). @since 1.0
+ */
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

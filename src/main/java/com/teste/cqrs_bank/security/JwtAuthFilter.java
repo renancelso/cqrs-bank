@@ -15,6 +15,16 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * Filtro que processa <code>Authorization: Bearer &lt;token&gt;</code>,
+ * valida o JWT via {@link com.teste.cqrs_bank.security.JwtTokenProvider}
+ * e povoa o contexto de segurança com o userId como principal.
+ *
+ * <p>Em caso de token inválido/expirado, segue sem autenticação e a segurança
+ * bloqueia as rotas protegidas.</p>
+ *
+ * @since 1.0
+ */
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwt;
@@ -33,12 +43,19 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             try {
                 Jws<Claims> jws = jwt.parse(token);
                 String userId = jws.getBody().getSubject();
-                String login  = (String) jws.getBody().get("login");
+                String login = (String) jws.getBody().get("login");
 
                 AbstractAuthenticationToken auth =
                         new AbstractAuthenticationToken(AuthorityUtils.NO_AUTHORITIES) {
-                            @Override public Object getCredentials() { return token; }
-                            @Override public Object getPrincipal() { return userId; }
+                            @Override
+                            public Object getCredentials() {
+                                return token;
+                            }
+
+                            @Override
+                            public Object getPrincipal() {
+                                return userId;
+                            }
                         };
                 auth.setDetails(login);
                 auth.setAuthenticated(true);

@@ -10,6 +10,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuração do Spring Security.
+ *
+ * <ul>
+ *   <li>Stateless (JWT); desabilita sessão.</li>
+ *   <li>Libera /auth/** e endpoints do Swagger/actuator citados no código.</li>
+ *   <li>Protege demais rotas; adiciona {@link com.teste.cqrs_bank.security.JwtAuthFilter} antes do UsernamePasswordAuthenticationFilter.</li>
+ * </ul>
+ *
+ * @since 1.0
+ */
 @Configuration
 public class SecurityConfig {
 

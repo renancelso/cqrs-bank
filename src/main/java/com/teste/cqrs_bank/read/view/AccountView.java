@@ -7,6 +7,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.Instant;
 import java.util.List;
 
+/**
+ * Documento Mongo do snapshot pronto para UI (collection: account_views).
+ * Chaves e formato:
+ * {
+ * "SaldoTotal": "0.00",
+ * "Historico": [
+ * { "type": "deposito"|"saque", "valor": "0.00", "data": "dd-MM-yyyy HH:mm:ss" }
+ * ]
+ * }
+ *
+ * <p>Os valores ficam como <b>strings formatadas</b>; cálculo numérico permanece no Write Model.</p>
+ *
+ * @since 1.0
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,7 +36,11 @@ public class AccountView {
     private List<HistoryItem> historico;
     private Instant updatedAt;
 
-    @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
     public static class HistoryItem {
         private String type;
         private String valor;

@@ -7,6 +7,12 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuração OpenAPI/Swagger com security scheme <code>bearerAuth</code> (HTTP bearer / JWT)
+ * e exigência global do esquema nas rotas protegidas.
+ *
+ * @since 1.0
+ */
 @Configuration
 public class OpenApiConfig {
 

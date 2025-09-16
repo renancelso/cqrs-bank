@@ -13,6 +13,25 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * Serviço de comandos (Write Model) que aplica as regras de negócio de transações,
+ * persiste em MySQL (Account/Transaction) e publica evento para atualização da
+ * projeção (MongoDB).
+ *
+ * <p>Regras principais:</p>
+ * <ul>
+ *   <li><b>pay-bill</b> (DEBIT): pode negativar a conta.</li>
+ *   <li><b>deposit</b> (CREDIT): se a conta estiver negativa, o depósito quita o principal
+ *       e aplica <b>1,02%</b> de juros sobre a parte quitada; o juro é descontado do próprio
+ *       depósito e a eventual sobra é creditada no saldo.</li>
+ * </ul>
+ *
+ * <p>Após salvar a transação e atualizar o saldo, publica
+ * {@link com.teste.cqrs_bank.write.events.TransactionEvent} via
+ * {@link com.teste.cqrs_bank.write.events.DomainEventPublisher}.</p>
+ *
+ * @since 1.0
+ */
 @Service
 public class TransactionService {
 
@@ -32,6 +51,7 @@ public class TransactionService {
         this.eventPublisher = eventPublisher;
     }
 
+    /** Registra depósito (CREDIT) aplicando a regra de quitação/juros quando negativado. */
     @Transactional
     public Account deposit(String userId, BigDecimal amount) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
@@ -79,6 +99,7 @@ public class TransactionService {
         return saved;
     }
 
+    /** Registra pagamento (DEBIT). Pode deixar a conta negativa. */
     @Transactional
     public Account payBill(String userId, BigDecimal amount) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {

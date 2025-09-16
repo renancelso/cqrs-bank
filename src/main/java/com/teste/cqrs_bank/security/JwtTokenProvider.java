@@ -12,6 +12,12 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+/**
+ * Geração e validação de JWT (HS256), usando segredo e expiração de {@link com.teste.cqrs_bank.config.JwtProperties}.
+ * Exponde <code>generateToken(userId, login)</code> e <code>parse(token)</code>.
+ *
+ * @since 1.0
+ */
 @Component
 public class JwtTokenProvider {
 

@@ -10,6 +10,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Entidade de conta (Write Model / JPA).
+ * Mantém o saldo numérico (pode ser negativo) e referência ao usuário dono.
+ *
+ * <p>Campos de auditoria: createdAt / updatedAt (timestamps).</p>
+ * @since 1.0
+ */
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor

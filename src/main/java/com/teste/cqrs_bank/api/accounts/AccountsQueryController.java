@@ -7,6 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlador de consulta (Query Side). Lê somente o Read Model (Mongo)
+ * e retorna o resumo da conta já no formato exigido pela UI.
+ *
+ * <p>Se o usuário ainda não tem projeção no Mongo, retorna:
+ * <code>{"SaldoTotal":"0.00","Historico":[]}</code>.</p>
+ *
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/accounts")
 public class AccountsQueryController {
@@ -19,6 +28,17 @@ public class AccountsQueryController {
         this.viewRepo = viewRepo;
     }
 
+    /**
+     * Retorna o snapshot do usuário autenticado a partir do Mongo, com chaves e
+     * valores formatados:
+     * {
+     *   "SaldoTotal": "0.00",
+     *   "Historico": [
+     *     { "type": "deposito"|"saque", "valor": "0.00", "data": "dd-MM-yyyy HH:mm:ss" }
+     *   ]
+     * }
+     * Rota: GET /accounts/me/summary
+     */
     @GetMapping("/me/summary")
     public ResponseEntity<?> getSummary(Authentication auth) {
         String userId = (String) auth.getPrincipal();

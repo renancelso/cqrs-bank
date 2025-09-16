@@ -11,6 +11,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+/**
+ * Serviço de autenticação/cadastro.
+ * - signup: cria User/Account e retorna JWT
+ * - login: valida credenciais e retorna JWT
+ * @since 1.0
+ */
 @Service
 public class AuthService {
 
@@ -27,6 +33,7 @@ public class AuthService {
         this.jwt = jwt;
     }
 
+    /** Cria usuário/conta e retorna JWT. */
     @Transactional
     public String signup(String fullName, String document, String login, String rawPassword) {
         Objects.requireNonNull(fullName); Objects.requireNonNull(document);
@@ -53,6 +60,7 @@ public class AuthService {
         return jwt.generateToken(user.getId(), user.getLogin());
     }
 
+    /** Autentica usuário e retorna JWT. */
     @Transactional
     public String login(String login, String rawPassword) {
         var user = userRepository.findByLogin(login)
