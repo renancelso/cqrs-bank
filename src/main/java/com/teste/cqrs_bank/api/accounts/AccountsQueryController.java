@@ -3,6 +3,10 @@ package com.teste.cqrs_bank.api.accounts;
 import com.teste.cqrs_bank.read.view.AccountView;
 import com.teste.cqrs_bank.read.view.AccountViewRepository;
 import com.teste.cqrs_bank.domain.account.AccountRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -32,14 +36,37 @@ public class AccountsQueryController {
      * Retorna o snapshot do usuário autenticado a partir do Mongo, com chaves e
      * valores formatados:
      * {
-     *   "SaldoTotal": "0.00",
-     *   "Historico": [
-     *     { "type": "deposito"|"saque", "valor": "0.00", "data": "dd-MM-yyyy HH:mm:ss" }
-     *   ]
+     * "SaldoTotal": "0.00",
+     * "Historico": [
+     * { "type": "deposito"|"saque", "valor": "0.00", "data": "dd-MM-yyyy HH:mm:ss" }
+     * ]
      * }
      * Rota: GET /accounts/me/summary
      */
     @GetMapping("/me/summary")
+    @Operation(
+            summary = "Resumo da conta",
+            description = "Retorna o snapshot pronto do Mongo no formato esperado",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Resumo da conta",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    examples = @ExampleObject(value = """
+                                            {
+                                              "SaldoTotal": "00.00",
+                                              "Historico": [
+                                                { "type": "deposito", "valor": "00.00", "data": "00-00-00 00:00:00" },
+                                                { "type": "saque", "valor": "0.00", "data": "00-00-00 00:00:00" },
+                                                { "type": "saque", "valor": "00.00", "data": "00-00-00 00:00:00" }
+                                              ]
+                                            }
+                                            """)
+                            )
+                    )
+            }
+    )
     public ResponseEntity<?> getSummary(Authentication auth) {
         String userId = (String) auth.getPrincipal();
         var acc = accountRepo.findByUserId(userId).orElseThrow();
