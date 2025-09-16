@@ -12,26 +12,30 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.Duration;
 
 import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
 class EndToEndFlowTest extends IntegrationTestBase {
 
-    @Autowired MockMvc mvc;
-    @Autowired ObjectMapper om;
+    @Autowired
+    MockMvc mvc;
+    @Autowired
+    ObjectMapper om;
 
     @Test
     void fluxoCompleto_cobra102_porcento_e_projeta_no_mongo() throws Exception {
         // 1) Signup
         String signup = """
-            {
-              "fullName": "Renan Celso",
-              "document": "39053344705",
-              "login": "rcelso",
-              "password": "123456"
-            }
-            """;
+                {
+                  "fullName": "Renan Celso",
+                  "document": "39053344705",
+                  "login": "rcelso",
+                  "password": "123456"
+                }
+                """;
         mvc.perform(post("/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(signup))

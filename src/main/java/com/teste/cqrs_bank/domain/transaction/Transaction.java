@@ -15,10 +15,14 @@ import java.util.UUID;
  * Campos principais: tipo (DEPOSIT/BILL_PAYMENT), valor (Decimal, scale=2), occurredAt (timestamp).
  *
  * <p>O histórico “pronto para UI” é montado no Read Model (Mongo) a partir dos eventos.</p>
+ *
  * @since 1.0
  */
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(

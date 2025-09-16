@@ -10,6 +10,7 @@ import java.util.Optional;
 /**
  * Repositório JPA de Account.
  * Inclui busca por usuário e variante com lock PESSIMISTIC_WRITE para atualização segura.
+ *
  * @since 1.0
  */
 public interface AccountRepository extends JpaRepository<Account, String> {

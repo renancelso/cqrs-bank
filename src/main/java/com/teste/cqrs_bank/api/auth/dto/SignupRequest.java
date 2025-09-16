@@ -8,4 +8,5 @@ public record SignupRequest(
         @CPF String document,
         @NotBlank String login,
         @NotBlank String password
-) {}
+) {
+}

@@ -7,7 +7,6 @@ import com.teste.cqrs_bank.domain.transaction.TransactionRepository;
 import com.teste.cqrs_bank.domain.transaction.TxType;
 import com.teste.cqrs_bank.write.events.DomainEventPublisher;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -51,7 +50,9 @@ public class TransactionService {
         this.eventPublisher = eventPublisher;
     }
 
-    /** Registra depósito (CREDIT) aplicando a regra de quitação/juros quando negativado. */
+    /**
+     * Registra depósito (CREDIT) aplicando a regra de quitação/juros quando negativado.
+     */
     @Transactional
     public Account deposit(String userId, BigDecimal amount) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
@@ -99,7 +100,9 @@ public class TransactionService {
         return saved;
     }
 
-    /** Registra pagamento (DEBIT). Pode deixar a conta negativa. */
+    /**
+     * Registra pagamento (DEBIT). Pode deixar a conta negativa.
+     */
     @Transactional
     public Account payBill(String userId, BigDecimal amount) {
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {

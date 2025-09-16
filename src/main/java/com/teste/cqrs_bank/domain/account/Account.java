@@ -15,9 +15,11 @@ import java.util.UUID;
  * Mantém o saldo numérico (pode ser negativo) e referência ao usuário dono.
  *
  * <p>Campos de auditoria: createdAt / updatedAt (timestamps).</p>
+ *
  * @since 1.0
  */
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

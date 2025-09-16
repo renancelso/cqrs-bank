@@ -6,11 +6,10 @@ import com.teste.cqrs_bank.domain.transaction.TransactionRepository;
 import com.teste.cqrs_bank.read.view.AccountView;
 import com.teste.cqrs_bank.read.view.AccountViewRepository;
 import com.teste.cqrs_bank.write.events.TransactionEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.event.TransactionalEventListener;
-import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.math.RoundingMode;
 import java.time.ZoneOffset;
